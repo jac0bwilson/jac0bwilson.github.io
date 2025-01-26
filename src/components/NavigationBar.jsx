@@ -1,4 +1,4 @@
-import { Navbar, NavbarBrand } from "@heroui/react";
+import { Navbar, NavbarBrand } from '@heroui/react';
 
 export default function NavigationBar() {
     return (
@@ -7,5 +7,5 @@ export default function NavigationBar() {
                 <p className="font-bold">Jacob Wilson</p>
             </NavbarBrand>
         </Navbar>
-    )
+    );
 }
