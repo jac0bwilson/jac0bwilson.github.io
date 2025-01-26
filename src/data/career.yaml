@@ -1,0 +1,30 @@
+- id: c1-android
+  company: Capital One
+  role: Software Engineer (SDE II)
+  start: February 2025
+  end: Present
+  location: London, UK
+  description: >
+    Working on our Android app, mainly focussed on building our in app chat
+    feature and modernising the codebase through Jetpack Compose, coroutines
+    and modularisation. 
+
+- id: c1-grad
+  company: Capital One
+  role: Graduate Software Engineer (SDE I)
+  start: September 2022
+  end: February 2025
+  location: London, UK
+  description: >
+    Completed rotations through the core technology areas: backend, web and
+    mobile.
+
+- id: apprentice
+  company: PwC UK
+  role: Technology Degree Apprentice
+  start: September 2018
+  end: July 2022
+  location: Birmingham, UK
+  description: >
+    Completed placements in multiple technology teams, ranging from software
+    engineering to cyber security.

@@ -1,0 +1,14 @@
+- id: linkedin
+  name: LinkedIn
+  url: https://www.linkedin.com/in/jacobsw/
+  colour: primary
+
+- id: github
+  name: GitHub
+  url: https://github.com/jac0bwilson
+  colour: foreground
+
+- id: instagram
+  name: Instagram
+  url: https://www.instagram.com/jac0bwilson/
+  colour: secondary

@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import { Link } from "@heroui/react";
+
+const links = await getCollection('links');
+---
+
+<div class="flex justify-center items-center gap-2 pt-4">
+    {links.map(link => (
+        <Link
+            isBlock
+            showAnchorIcon
+            href={link.data.url}
+            target='_blank'
+            color={link.data.colour}
+        >
+            {link.data.name}
+        </Button>
+    ))}
+</div>
