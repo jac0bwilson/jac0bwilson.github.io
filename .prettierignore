@@ -1,5 +1,6 @@
 .astro/
+.github/
+.vscode/
 build/
 dist/
 node_modules/
-.vscode/
