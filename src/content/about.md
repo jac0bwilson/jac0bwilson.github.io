@@ -1,10 +1,11 @@
-Hey, I'm Jacob! I'm a software engineer based in London, UK.
+Hey, I'm Jacob! I'm an Android developer at Capital One, based in London, UK.
 
-I'm an Android developer at Capital One, but I completed rotations in a few
-different areas over the course of my time on the graduate programme.
+Throughout my time here on the graduate programme I also spent time as a web
+developer and working on backend services.
 
-As well as the coding, throughout my time here I've also played a major part in
-organising our summer internship programme.
+As well as coding, throughout my time here I've played a major part in
+organising our summer internship and I now lead the team working towards the
+2025 programme.
 
 Outside of work, you’ll find me engrossed in a book or watching the F1, but I
 also love to travel and take photos!
