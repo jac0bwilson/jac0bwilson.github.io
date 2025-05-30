@@ -1,15 +1,12 @@
 ---
 import { Image } from 'astro:assets';
-import { Card } from '@heroui/react';
 import headshot from '../assets/jacob-wilson.jpeg';
 import { Content } from '../content/about.md'
 import Links from './Links.astro';
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4">
-    <Card className="aspect-square mx-auto container">
-        <Image src={headshot} alt="Jacob Wilson" />
-    </Card>
+    <Image src={headshot} alt="Jacob Wilson" class="mx-auto rounded-xl shadow-xl" />
     <div class="mx-auto">
         <h1 class="font-bold text-4xl py-2 text-primary-400">Jacob Wilson</h1>
         <div class="space-y-2 text-lg">

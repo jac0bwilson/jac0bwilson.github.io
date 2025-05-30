@@ -5,9 +5,9 @@
   end: Present
   location: London, UK
   description: >
-      Working on our Android app, mainly focussed on building our in app chat
-      feature and modernising the codebase through Jetpack Compose, coroutines
-      and modularisation.
+      Delivering features to millions of customers who use our Android app.
+      Passionate about building high-quality products and driving developer
+      experience improvements.
 
 - id: c1-grad
   company: Capital One
@@ -17,7 +17,8 @@
   location: London, UK
   description: >
       Completed rotations through the core technology areas: backend, web and
-      mobile.
+      mobile. Contributed to feature delivery, platform health and testing
+      improvements.
 
 - id: apprentice
   company: PwC UK
