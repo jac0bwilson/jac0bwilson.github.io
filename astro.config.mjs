@@ -7,10 +7,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
-  site: 'https://jacobw.uk',
+    integrations: [react()],
+    site: 'https://jacobw.uk',
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+    vite: {
+        plugins: [tailwindcss()],
+    },
 });
