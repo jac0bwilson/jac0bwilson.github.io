@@ -12,5 +12,10 @@ export default defineConfig({
 
     vite: {
         plugins: [tailwindcss()],
+        define: {
+            'import.meta.env.CLOUDINARY_CLOUD_NAME': JSON.stringify(process.env.CLOUDINARY_CLOUD_NAME),
+            'import.meta.env.CLOUDINARY_API_KEY': JSON.stringify(process.env.CLOUDINARY_API_KEY),
+            'import.meta.env.CLOUDINARY_API_SECRET': JSON.stringify(process.env.CLOUDINARY_API_SECRET),
+        },                                                                                                          
     },
 });
