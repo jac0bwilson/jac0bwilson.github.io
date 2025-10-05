@@ -18,13 +18,26 @@ const { resources }: { resources: CloudinaryResource[] } = await cloudinary.sear
 <Layout>
     <h1 class="text-2xl font-bold">Photography</h1>
     <div class="columns-1 md:columns-2 lg:columns-3 gap-8">
-        {resources.map((resource) => (
-            <Image
-                src={resource.secure_url}
-                width={resource.width}
-                height={resource.height}
-                alt={resource.public_id}
-            />
-        ))}
+        {resources
+            .toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+            .map((resource) =>
+                {
+                    const url = cloudinary.url(resource.public_id, {
+                        quality: 65,
+                        fetch_format: 'auto',
+                    });
+
+                    return (
+                        <Image
+                            class="mb-8"
+                            src={url}
+                            width={resource.width}
+                            height={resource.height}
+                            alt={resource.public_id}
+                        />
+                    );
+                }
+            )
+        }
     </div>
 </Layout>

@@ -27,7 +27,7 @@ export default function NavigationBar({
             <NavbarBrand>
                 <p className="font-bold">Jacob Wilson</p>
             </NavbarBrand>
-            <NavbarContent className="hidden sm:flex">
+            <NavbarContent className="hidden sm:flex" justify="end">
                 {menuItems.map((item) => (
                     <NavbarItem
                         key={item.href}

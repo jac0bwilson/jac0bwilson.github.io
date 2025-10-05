@@ -24,6 +24,10 @@ jobs:
         uses: withastro/action@v4
         with:
             node-version: 22
+        env:
+            CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+            CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+            CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
   deploy:
     needs: build
