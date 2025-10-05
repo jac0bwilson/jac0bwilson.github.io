@@ -16,7 +16,7 @@ import "../styles/global.css";
 	</head>
 	<body class="text-foreground bg-background">
 		<div class="relative flex flex-col h-screen">
-			<NavigationBar />
+			<NavigationBar client:load currentPath={Astro.url.pathname} />
 
 			<div class="container mx-auto max-w-6xl px-8 grow pb-8 space-y-4">
 				<slot />
