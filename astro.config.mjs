@@ -9,8 +9,11 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
     integrations: [react()],
     site: 'https://jacobw.uk',
+    image: {
+        domains: ['res.cloudinary.com'],
+    },
 
     vite: {
-        plugins: [tailwindcss()],                                                                                                         
+        plugins: [tailwindcss()],
     },
 });
