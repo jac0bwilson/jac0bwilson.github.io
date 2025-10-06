@@ -23,7 +23,7 @@ const { resources }: { resources: CloudinaryResource[] } = await cloudinary.sear
             .map((resource) =>
                 {
                     const url = cloudinary.url(resource.public_id, {
-                        quality: 65,
+                        quality: 'auto:eco',
                         fetch_format: 'auto',
                     });
 
