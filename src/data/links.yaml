@@ -1,14 +1,14 @@
 - id: linkedin
   name: LinkedIn
-  url: https://www.linkedin.com/in/jacobsw/
+  url: https://link.jacobw.uk/linkedin
   colour: primary
 
 - id: github
   name: GitHub
-  url: https://github.com/jac0bwilson
+  url: https://link.jacobw.uk/github
   colour: foreground
 
 - id: instagram
   name: Instagram
-  url: https://www.instagram.com/jac0bwilson/
+  url: https://link.jacobw.uk/instagram
   colour: secondary

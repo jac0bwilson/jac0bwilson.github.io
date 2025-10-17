@@ -1,13 +1,13 @@
 - id: c1-android
   company: Capital One
-  role: Software Engineer (SDE II)
+  role: Software Engineer - Android (SDE II)
   start: February 2025
   end: Present
   location: London, UK
   description: >
       Delivering features to millions of customers who use our Android app and
-      making developer experience improvements. Currently focused on building
-      out a new design system using Jetpack Compose.
+      making developer experience improvements. Currently building new
+      applications, design systems and a Server-Driven UI framework.
 
 - id: c1-grad
   company: Capital One
