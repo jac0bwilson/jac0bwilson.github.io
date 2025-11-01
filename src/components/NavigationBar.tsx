@@ -5,9 +5,6 @@ import {
     NavbarBrand,
     NavbarContent,
     NavbarItem,
-    NavbarMenu,
-    NavbarMenuItem,
-    NavbarMenuToggle,
 } from '@heroui/react';
 import ThemeToggleButton from './ThemeToggleButton';
 
@@ -25,6 +22,7 @@ export default function NavigationBar({
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
             className="dark:bg-gray-900"
+            isBlurred={false}
         >
             <NavbarBrand>
                 <Link color="foreground" href="/" className="font-bold">
@@ -44,22 +42,6 @@ export default function NavigationBar({
                     <ThemeToggleButton />
                 </NavbarItem>
             </NavbarContent>
-
-            {/* <NavbarMenuToggle className="sm:hidden" />
-
-            <NavbarMenu>
-                {menuItems.map((item) => (
-                    <NavbarMenuItem
-                        key={item.href}
-                        isActive={currentPath === item.href}
-                    >
-                        <Link href={item.href}>{item.text}</Link>
-                    </NavbarMenuItem>
-                ))}
-                <NavbarMenuItem>
-                    <ThemeToggleButton />
-                </NavbarMenuItem>
-            </NavbarMenu> */}
         </Navbar>
     );
 }
