@@ -3,7 +3,7 @@ import type { Job } from '../data/types';
 
 export default function JobCard({ job }: { job: Job }) {
     return (
-        <Card>
+        <Card className="dark:bg-gray-800 ring ring-gray-900/5 dark:text-white">
             <CardHeader className="pb-0">
                 <div className="flex flex-col gap-0">
                     <p className="font-bold">{job.role}</p>

@@ -6,6 +6,17 @@ import "../styles/global.css";
 <!doctype html>
 <html lang="en">
 	<head>
+		<script is:inline>
+			if (
+				localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) &&
+					window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -14,7 +25,7 @@ import "../styles/global.css";
 		<meta name="generator" content={Astro.generator} />
 		<title>Jacob Wilson</title>
 	</head>
-	<body class="text-foreground bg-background">
+	<body class="text-foreground bg-background dark:bg-gray-900">
 		<div class="relative flex flex-col h-screen">
 			<NavigationBar client:load currentPath={Astro.url.pathname} />
 

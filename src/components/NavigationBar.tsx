@@ -9,6 +9,7 @@ import {
     NavbarMenuItem,
     NavbarMenuToggle,
 } from '@heroui/react';
+import ThemeToggleButton from './ThemeToggleButton';
 
 export default function NavigationBar({
     currentPath,
@@ -17,17 +18,20 @@ export default function NavigationBar({
 }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const menuItems = [
-        { text: 'Home', href: '/' },
-        { text: 'Photography', href: '/photography/' },
-    ];
+    const menuItems = [{ text: 'Photography', href: '/photography/' }];
 
     return (
-        <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+        <Navbar
+            isMenuOpen={isMenuOpen}
+            onMenuOpenChange={setIsMenuOpen}
+            className="dark:bg-gray-900"
+        >
             <NavbarBrand>
-                <p className="font-bold">Jacob Wilson</p>
+                <Link color="foreground" href="/" className="font-bold">
+                    Jacob Wilson
+                </Link>
             </NavbarBrand>
-            <NavbarContent className="hidden sm:flex" justify="end">
+            <NavbarContent justify="end">
                 {menuItems.map((item) => (
                     <NavbarItem
                         key={item.href}
@@ -36,9 +40,12 @@ export default function NavigationBar({
                         <Link href={item.href}>{item.text}</Link>
                     </NavbarItem>
                 ))}
+                <NavbarItem>
+                    <ThemeToggleButton />
+                </NavbarItem>
             </NavbarContent>
 
-            <NavbarMenuToggle className="sm:hidden" />
+            {/* <NavbarMenuToggle className="sm:hidden" />
 
             <NavbarMenu>
                 {menuItems.map((item) => (
@@ -49,7 +56,10 @@ export default function NavigationBar({
                         <Link href={item.href}>{item.text}</Link>
                     </NavbarMenuItem>
                 ))}
-            </NavbarMenu>
+                <NavbarMenuItem>
+                    <ThemeToggleButton />
+                </NavbarMenuItem>
+            </NavbarMenu> */}
         </Navbar>
     );
 }
