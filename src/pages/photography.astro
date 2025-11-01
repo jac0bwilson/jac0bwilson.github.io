@@ -1,43 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { v2 as cloudinary } from 'cloudinary';
-import { Image } from 'astro:assets';
-import type { CloudinaryResource } from '../data/types';
-
-cloudinary.config({
-    cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
-    api_key: import.meta.env.CLOUDINARY_API_KEY,
-    api_secret: import.meta.env.CLOUDINARY_API_SECRET,
-});
-
-const { resources }: { resources: CloudinaryResource[] } = await cloudinary.search
-    .expression('resource_type:image')
-    .execute();
+import PhotoGrid from '../components/PhotoGrid.astro';
+import { Content } from '../content/photography.md';
 ---
 
 <Layout>
-    <h1 class="text-2xl font-bold">Photography</h1>
-    <div class="columns-1 md:columns-2 lg:columns-3 gap-8">
-        {resources
-            .toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-            .map((resource) =>
-                {
-                    const url = cloudinary.url(resource.public_id, {
-                        quality: 'auto:eco',
-                        fetch_format: 'auto',
-                    });
-
-                    return (
-                        <Image
-                            class="mb-8"
-                            src={url}
-                            width={resource.width}
-                            height={resource.height}
-                            alt={resource.public_id}
-                        />
-                    );
-                }
-            )
-        }
-    </div>
+	<Content />
+    <PhotoGrid />
 </Layout>
