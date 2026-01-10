@@ -6,5 +6,14 @@
     "jsxSingleQuote": false,
     "trailingComma": "all",
     "bracketSpacing": true,
-    "bracketSameLine": false
+    "bracketSameLine": false,
+    "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+    "overrides": [
+        {
+            "files": "*.astro",
+            "options": {
+                "parser": "astro"
+            }
+        }
+    ]
 }

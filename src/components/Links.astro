@@ -1,21 +1,23 @@
 ---
 import { getCollection } from 'astro:content';
-import { Link as HeroLink } from "@heroui/react";
-import type { LinkEntry } from "../data/types.ts";
+import { Link as HeroLink } from '@heroui/react';
+import type { LinkEntry } from '../data/types.ts';
 
 const links = (await getCollection('links')) as LinkEntry[];
 ---
 
-<div class="flex justify-center items-center gap-2 pt-4">
-    {links.map(link => (
-        <HeroLink
-            isBlock
-            showAnchorIcon
-            href={link.data.url}
-            target='_blank'
-            color={link.data.colour}
-        >
-            {link.data.name}
-        </HeroLink>
-    ))}
+<div class="flex items-center justify-center gap-2 pt-4">
+    {
+        links.map((link) => (
+            <HeroLink
+                isBlock
+                showAnchorIcon
+                href={link.data.url}
+                target="_blank"
+                color={link.data.colour}
+            >
+                {link.data.name}
+            </HeroLink>
+        ))
+    }
 </div>

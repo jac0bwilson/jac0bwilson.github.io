@@ -1,45 +1,63 @@
 ---
 import NavigationBar from '../components/NavigationBar.tsx';
-import "../styles/global.css";
+import '../styles/global.css';
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<script is:inline>
-			if (
-				localStorage.theme === 'dark' ||
-				(!('theme' in localStorage) &&
-					window.matchMedia('(prefers-color-scheme: dark)').matches)
-			) {
-				document.documentElement.classList.add('dark');
-			} else {
-				document.documentElement.classList.remove('dark');
-			}
-		</script>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<meta name="generator" content={Astro.generator} />
-		<title>Jacob Wilson</title>
-	</head>
-	<body class="text-foreground bg-background dark:bg-stone-900 dark:text-stone-200">
-		<div class="relative flex flex-col min-h-screen">
-			<NavigationBar client:load currentPath={Astro.url.pathname} />
+    <head>
+        <script is:inline>
+            if (
+                localStorage.theme === 'dark' ||
+                (!('theme' in localStorage) &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches)
+            ) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <meta name="generator" content={Astro.generator} />
+        <title>Jacob Wilson</title>
+    </head>
+    <body
+        class="text-foreground bg-background dark:bg-stone-900 dark:text-stone-200"
+    >
+        <div class="relative flex min-h-screen flex-col">
+            <NavigationBar client:load currentPath={Astro.url.pathname} />
 
-			<div class="container mx-auto max-w-6xl px-8 grow pb-8 pt-8 space-y-4">
-				<slot />
-			</div>
-		</div>
-	</body>
+            <div
+                class="container mx-auto max-w-6xl grow space-y-4 px-8 pt-8 pb-8"
+            >
+                <slot />
+            </div>
+        </div>
+    </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-	}
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+    }
 </style>
