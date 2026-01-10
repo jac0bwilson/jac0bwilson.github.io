@@ -21,8 +21,8 @@ export default function NavigationBar({
         <Navbar
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
-            className="dark:bg-gray-900"
-            isBlurred={false}
+            className="dark:bg-stone-800/50 border-b border-stone-100 dark:border-stone-700/50"
+            isBlurred={true}
         >
             <NavbarBrand>
                 <Link color="foreground" href="/" className="font-bold">

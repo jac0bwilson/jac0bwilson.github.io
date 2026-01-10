@@ -25,11 +25,11 @@ import "../styles/global.css";
 		<meta name="generator" content={Astro.generator} />
 		<title>Jacob Wilson</title>
 	</head>
-	<body class="text-foreground bg-background dark:bg-gray-900">
+	<body class="text-foreground bg-background dark:bg-stone-900 dark:text-stone-200">
 		<div class="relative flex flex-col min-h-screen">
 			<NavigationBar client:load currentPath={Astro.url.pathname} />
 
-			<div class="container mx-auto max-w-6xl px-8 grow pb-8 space-y-4">
+			<div class="container mx-auto max-w-6xl px-8 grow pb-8 pt-8 space-y-4">
 				<slot />
 			</div>
 		</div>
