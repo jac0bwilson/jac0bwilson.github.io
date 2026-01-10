@@ -11,31 +11,50 @@ cloudinary.config({
 
 const { resources }: { resources: CloudinaryResource[] } =
     await cloudinary.search.expression('resource_type:image').execute();
+
+const sortedResources = resources.toSorted(
+    (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+);
 ---
 
-<div class="columns-1 gap-8 md:columns-2 lg:columns-3">
+<div class="flex flex-wrap gap-4">
     {
-        resources
-            .toSorted(
-                (a, b) =>
-                    new Date(b.created_at).getTime() -
-                    new Date(a.created_at).getTime(),
-            )
-            .map((resource) => {
-                const url = cloudinary.url(resource.public_id, {
-                    quality: 'auto:eco',
-                    fetch_format: 'auto',
-                });
+        sortedResources.map((resource) => {
+            const url = cloudinary.url(resource.public_id, {
+                quality: 'auto:eco',
+                fetch_format: 'auto',
+            });
+            const aspectRatio = resource.width / resource.height;
 
-                return (
+            const flexBasis = 300 * aspectRatio;
+
+            return (
+                <div
+                    class="relative grow overflow-hidden rounded-xl shadow-sm transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-xl"
+                    style={{
+                        flexBasis: `${flexBasis}px`,
+                        flexGrow: aspectRatio * 100,
+                        maxWidth: '100%',
+                    }}
+                >
+                    <i
+                        style={{
+                            paddingBottom: `${(resource.height / resource.width) * 100}%`,
+                        }}
+                        class="block"
+                    />
+
                     <Image
-                        class="mb-8 cursor-pointer rounded-xl shadow-sm transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-xl"
+                        class="absolute inset-0 h-full w-full object-cover"
                         src={url}
                         width={resource.width}
                         height={resource.height}
                         alt={resource.public_id}
                     />
-                );
-            })
+                </div>
+            );
+        })
     }
+    <div class="grow-[999] basis-[500px]"></div>
 </div>
