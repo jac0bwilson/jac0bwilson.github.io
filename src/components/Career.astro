@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 const jobs = await getCollection('career');
 ---
 
-<div class="relative mx-auto max-w-4xl py-2">
+<div class="relative py-2">
     <h2 class="mb-4 text-3xl font-bold">Career</h2>
 
     <div class="relative">
@@ -34,7 +34,7 @@ const jobs = await getCollection('career');
                                         {job.data.company} • {job.data.location}
                                     </p>
                                 </div>
-                                <p class="max-w-2xl text-stone-600 dark:text-stone-400">
+                                <p class="text-stone-600 dark:text-stone-400">
                                     {job.data.description}
                                 </p>
                             </div>
