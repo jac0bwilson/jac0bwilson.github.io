@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 
-const jobs = await getCollection('career');
+const jobs = [...(await getCollection('career'))].sort(
+    (left, right) => right.data.position - left.data.position,
+);
 ---
 
 <div class="relative py-2">

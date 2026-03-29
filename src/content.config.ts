@@ -1,10 +1,12 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { file } from 'astro/loaders';
 
 const career = defineCollection({
     loader: file('src/data/career.yaml'),
     schema: z.object({
         id: z.string(),
+        position: z.number(),
         company: z.string(),
         role: z.string(),
         start: z.string(),
