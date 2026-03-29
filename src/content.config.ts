@@ -22,7 +22,7 @@ const links = defineCollection({
         id: z.string(),
         name: z.string(),
         url: z.string(),
-        colour: z.string(),
+        colour: z.enum(['foreground', 'accent']),
     }),
 });
 

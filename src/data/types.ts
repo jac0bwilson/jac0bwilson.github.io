@@ -2,13 +2,12 @@ export type Link = {
     id: string;
     name: string;
     url: string;
-    colour:
-        | 'foreground'
-        | 'primary'
-        | 'secondary'
-        | 'success'
-        | 'warning'
-        | 'danger';
+    colour: 'foreground' | 'accent';
+};
+
+export type NavigationItem = {
+    text: string;
+    href: string;
 };
 
 export type LinkEntry = {

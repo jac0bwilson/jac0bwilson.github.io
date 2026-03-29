@@ -1,7 +1,7 @@
 - id: linkedin
   name: LinkedIn
   url: https://link.jacobw.uk/linkedin
-  colour: primary
+  colour: accent
 
 - id: github
   name: GitHub

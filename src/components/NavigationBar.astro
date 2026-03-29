@@ -1,0 +1,53 @@
+---
+import ThemeToggleButton from './ThemeToggleButton.astro';
+import { navigationItems } from '../data/navigation';
+
+interface Props {
+    currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<nav
+    class="sticky top-0 z-40 w-full border-b border-stone-200/70 bg-white/55 shadow-sm shadow-black/5 backdrop-blur-xl supports-[backdrop-filter]:bg-white/45 dark:border-stone-700/50 dark:bg-stone-900/45 dark:shadow-black/20 dark:supports-[backdrop-filter]:bg-stone-900/35"
+>
+    <div
+        class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-8 py-4"
+    >
+        <a
+            href="/"
+            class="text-foreground hover:text-accent rounded-full px-2 py-1 font-bold no-underline transition-colors hover:no-underline"
+        >
+            Jacob Wilson
+        </a>
+
+        <ul class="flex items-center gap-3">
+            {
+                navigationItems.map((item) => {
+                    const isActive = currentPath === item.href;
+
+                    return (
+                        <li>
+                            <a
+                                href={item.href}
+                                aria-current={isActive ? 'page' : undefined}
+                                class:list={[
+                                    'rounded-full px-3 py-1.5 text-sm font-medium no-underline',
+                                    isActive
+                                        ? 'border-accent/20 bg-accent/10 text-accent border'
+                                        : 'text-foreground/75 hover:text-foreground border border-transparent transition-colors hover:border-stone-200/70 hover:bg-white/50 hover:no-underline dark:hover:border-stone-700/70 dark:hover:bg-stone-800/50',
+                                ]}
+                            >
+                                {item.text}
+                            </a>
+                        </li>
+                    );
+                })
+            }
+            <li>
+                <ThemeToggleButton />
+            </li>
+        </ul>
+    </div>
+</nav>
