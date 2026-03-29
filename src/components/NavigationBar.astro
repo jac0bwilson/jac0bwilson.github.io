@@ -17,7 +17,7 @@ const { currentPath } = Astro.props;
     >
         <a
             href="/"
-            class="text-foreground hover:text-accent rounded-full px-2 py-1 font-bold no-underline transition-colors hover:no-underline"
+            class="text-foreground hover:text-accent inline-flex h-9 items-center rounded-full px-2 font-bold no-underline transition-colors hover:no-underline"
         >
             Jacob Wilson
         </a>
@@ -33,7 +33,7 @@ const { currentPath } = Astro.props;
                                 href={item.href}
                                 aria-current={isActive ? 'page' : undefined}
                                 class:list={[
-                                    'rounded-full px-3 py-1.5 text-sm font-medium no-underline',
+                                    'inline-flex h-9 items-center rounded-full px-3 text-sm font-medium no-underline',
                                     isActive
                                         ? 'border-accent/20 bg-accent/10 text-accent border'
                                         : 'text-foreground/75 hover:text-foreground border border-transparent transition-colors hover:border-stone-200/70 hover:bg-white/50 hover:no-underline dark:hover:border-stone-700/70 dark:hover:bg-stone-800/50',
