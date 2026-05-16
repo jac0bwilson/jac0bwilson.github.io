@@ -1,7 +1,14 @@
+---
+import { quietTopbarControlClass } from './topbarControlStyles';
+---
+
 <button
     type="button"
     aria-label="Toggle theme"
-    class="text-foreground inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-200/70 bg-white/45 text-lg transition-colors hover:bg-white/65 dark:border-stone-700/70 dark:bg-stone-800/45 dark:hover:bg-stone-800/65"
+    class:list={[
+        quietTopbarControlClass,
+        'text-foreground w-9 cursor-pointer justify-center text-lg',
+    ]}
     data-theme-toggle
 >
     <span aria-hidden="true" data-theme-icon>☀️</span>
