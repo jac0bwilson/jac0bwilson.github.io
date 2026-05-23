@@ -1,6 +1,18 @@
 ---
 import NavigationBar from '../components/NavigationBar.astro';
 import '../styles/global.css';
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const {
+    title = 'Jacob Wilson',
+    description = 'London-based software engineer specialising in Android, mobile apps, design systems and developer tooling.',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -43,7 +55,14 @@ import '../styles/global.css';
             rel="stylesheet"
         />
         <meta name="generator" content={Astro.generator} />
-        <title>Jacob Wilson</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
     </head>
     <body
         class="text-foreground bg-background dark:bg-stone-900 dark:text-stone-200"
