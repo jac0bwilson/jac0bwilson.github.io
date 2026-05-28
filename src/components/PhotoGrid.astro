@@ -1,7 +1,8 @@
 ---
 import { v2 as cloudinary } from 'cloudinary';
 import { Image } from 'astro:assets';
-import type { CloudinaryResource } from '../data/types';
+import PhotoLightbox from './PhotoLightbox.astro';
+import type { CloudinaryResource, Photo } from '../data/types';
 
 cloudinary.config({
     cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
@@ -16,45 +17,65 @@ const sortedResources = resources.toSorted(
     (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
 );
+
+const photos: Photo[] = sortedResources.map((resource) => {
+    const thumbnailUrl = cloudinary.url(resource.public_id, {
+        quality: 'auto:eco',
+        fetch_format: 'auto',
+    });
+    const fullUrl = cloudinary.url(resource.public_id, {
+        width: 2400,
+        crop: 'limit',
+        quality: 'auto:good',
+        fetch_format: 'auto',
+    });
+    const aspectRatio = resource.width / resource.height;
+
+    return {
+        ...resource,
+        alt: resource.public_id.replaceAll(/[-_/]/g, ' '),
+        aspectRatio,
+        flexBasis: 300 * aspectRatio,
+        thumbnailUrl,
+        fullUrl,
+    };
+});
 ---
 
 <div class="flex flex-wrap gap-4">
     {
-        sortedResources.map((resource) => {
-            const url = cloudinary.url(resource.public_id, {
-                quality: 'auto:eco',
-                fetch_format: 'auto',
-            });
-            const aspectRatio = resource.width / resource.height;
-
-            const flexBasis = 300 * aspectRatio;
-
+        photos.map((photo, index) => {
             return (
-                <div
-                    class="relative grow overflow-hidden rounded-xl shadow-sm transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-xl"
+                <a
+                    class="group focus:ring-accent focus:ring-offset-background relative grow cursor-zoom-in overflow-hidden rounded-xl shadow-sm transition-all duration-300 ease-in-out hover:scale-[1.01] hover:shadow-xl focus:ring-2 focus:ring-offset-4 focus:outline-none"
+                    href={photo.fullUrl}
+                    data-photo-trigger
+                    data-photo-index={index}
                     style={{
-                        flexBasis: `${flexBasis}px`,
-                        flexGrow: aspectRatio * 100,
+                        flexBasis: `${photo.flexBasis}px`,
+                        flexGrow: photo.aspectRatio * 100,
                         maxWidth: '100%',
                     }}
+                    aria-label={`View ${photo.alt} larger`}
                 >
                     <i
                         style={{
-                            paddingBottom: `${(resource.height / resource.width) * 100}%`,
+                            paddingBottom: `${(photo.height / photo.width) * 100}%`,
                         }}
                         class="block"
                     />
 
                     <Image
-                        class="absolute inset-0 h-full w-full object-cover"
-                        src={url}
-                        width={resource.width}
-                        height={resource.height}
-                        alt={resource.public_id}
+                        class="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                        src={photo.thumbnailUrl}
+                        width={photo.width}
+                        height={photo.height}
+                        alt={photo.alt}
                     />
-                </div>
+                </a>
             );
         })
     }
     <div class="grow-[999] basis-[500px]"></div>
 </div>
+<PhotoLightbox photos={photos} />

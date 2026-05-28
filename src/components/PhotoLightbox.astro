@@ -1,0 +1,240 @@
+---
+import { elevatedControlClass } from './controlStyles';
+import type { Photo } from '../data/types';
+
+interface Props {
+    photos: Photo[];
+}
+
+const { photos } = Astro.props;
+
+const lightboxIconButtonClass = `${elevatedControlClass} size-10 justify-center`;
+const lightboxArrowButtonClass = `${elevatedControlClass} absolute z-20 size-11 justify-center disabled:cursor-not-allowed disabled:opacity-35`;
+const lightboxLinkClass = `${elevatedControlClass} h-10 gap-2 px-3 text-sm font-medium no-underline hover:no-underline`;
+---
+
+<dialog
+    class="text-foreground m-auto max-h-[100dvh] max-w-[100dvw] bg-transparent p-0 backdrop:bg-stone-950/90 backdrop:backdrop-blur-sm"
+    data-photo-dialog
+    aria-label="Expanded photo viewer"
+>
+    <div
+        class="grid h-[100dvh] w-[100dvw] grid-rows-[auto_1fr_auto] gap-3 p-3 sm:p-5"
+    >
+        <div class="flex items-center justify-end gap-2">
+            <a
+                class={lightboxLinkClass}
+                href={photos[0]?.fullUrl}
+                data-photo-open-original
+                target="_blank"
+                rel="noreferrer"
+            >
+                Open original
+                <span aria-hidden="true" class="shrink-0 text-xs">↗</span>
+            </a>
+            <button
+                class={lightboxIconButtonClass}
+                type="button"
+                data-photo-close
+                aria-label="Close expanded photo"
+            >
+                <svg
+                    class="size-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div
+            class="relative flex min-h-0 items-center justify-center"
+            data-photo-stage
+        >
+            <button
+                class="absolute inset-y-0 left-0 z-10 w-1/2 focus:outline-none"
+                type="button"
+                data-photo-previous-zone
+                tabindex="-1"
+                aria-hidden="true"
+            >
+            </button>
+            <button
+                class="absolute inset-y-0 right-0 z-10 w-1/2 focus:outline-none"
+                type="button"
+                data-photo-next-zone
+                tabindex="-1"
+                aria-hidden="true"
+            >
+            </button>
+            <button
+                class:list={[lightboxArrowButtonClass, 'left-0']}
+                type="button"
+                data-photo-previous
+                aria-label="View previous photo"
+            >
+                <svg
+                    class="size-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+            </button>
+            <img
+                class="max-h-full max-w-full rounded-lg object-contain shadow-2xl"
+                src={photos[0]?.fullUrl}
+                alt={photos[0]?.alt}
+                width={photos[0]?.width}
+                height={photos[0]?.height}
+                style={{
+                    aspectRatio: `${photos[0]?.width} / ${photos[0]?.height}`,
+                }}
+                data-photo-image
+            />
+            <button
+                class:list={[lightboxArrowButtonClass, 'right-0']}
+                type="button"
+                data-photo-next
+                aria-label="View next photo"
+            >
+                <svg
+                    class="size-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="m9 18 6-6-6-6"></path>
+                </svg>
+            </button>
+        </div>
+
+        <p
+            class="bg-background/90 text-foreground mx-auto rounded-full border border-transparent px-3 py-1 text-sm font-medium shadow-lg backdrop-blur"
+            data-photo-count
+        >
+            1 / {photos.length}
+        </p>
+    </div>
+</dialog>
+
+<script define:vars={{ photos }}>
+    const dialog = document.querySelector('[data-photo-dialog]');
+    const image = document.querySelector('[data-photo-image]');
+    const originalLink = document.querySelector('[data-photo-open-original]');
+    const count = document.querySelector('[data-photo-count]');
+    const previousButton = document.querySelector('[data-photo-previous]');
+    const nextButton = document.querySelector('[data-photo-next]');
+    const previousZone = document.querySelector('[data-photo-previous-zone]');
+    const nextZone = document.querySelector('[data-photo-next-zone]');
+    const closeButton = document.querySelector('[data-photo-close]');
+    const triggers = document.querySelectorAll('[data-photo-trigger]');
+    let currentIndex = 0;
+    let pendingNavigation = 0;
+    let navigationFrame = null;
+
+    const preloadPhoto = (index) => {
+        const photo = photos[index];
+
+        if (!photo) {
+            return;
+        }
+
+        const preloadImage = new Image();
+        preloadImage.src = photo.fullUrl;
+    };
+
+    const setPhoto = (index) => {
+        currentIndex = Math.max(0, Math.min(index, photos.length - 1));
+        const photo = photos[currentIndex];
+
+        if (!photo) {
+            return;
+        }
+
+        image.width = photo.width;
+        image.height = photo.height;
+        image.style.aspectRatio = `${photo.width} / ${photo.height}`;
+        image.src = photo.fullUrl;
+        image.alt = photo.alt;
+        originalLink.href = photo.fullUrl;
+        count.textContent = `${currentIndex + 1} / ${photos.length}`;
+        previousButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex === photos.length - 1;
+        previousZone.disabled = previousButton.disabled;
+        nextZone.disabled = nextButton.disabled;
+
+        preloadPhoto(currentIndex - 2);
+        preloadPhoto(currentIndex - 1);
+        preloadPhoto(currentIndex + 1);
+        preloadPhoto(currentIndex + 2);
+    };
+
+    const navigatePhoto = (direction) => {
+        pendingNavigation += direction;
+
+        if (navigationFrame) {
+            return;
+        }
+
+        navigationFrame = requestAnimationFrame(() => {
+            setPhoto(currentIndex + pendingNavigation);
+            pendingNavigation = 0;
+            navigationFrame = null;
+        });
+    };
+
+    const openPhoto = (index) => {
+        pendingNavigation = 0;
+        cancelAnimationFrame(navigationFrame);
+        navigationFrame = null;
+        setPhoto(index);
+        dialog.showModal();
+        closeButton.focus();
+    };
+
+    triggers.forEach((trigger) => {
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            openPhoto(Number(trigger.dataset.photoIndex));
+        });
+    });
+
+    closeButton.addEventListener('click', () => dialog.close());
+    previousButton.addEventListener('click', () => navigatePhoto(-1));
+    nextButton.addEventListener('click', () => navigatePhoto(1));
+    previousZone.addEventListener('click', () => navigatePhoto(-1));
+    nextZone.addEventListener('click', () => navigatePhoto(1));
+
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) {
+            dialog.close();
+        }
+    });
+
+    dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft' && currentIndex > 0) {
+            navigatePhoto(-1);
+        }
+
+        if (event.key === 'ArrowRight' && currentIndex < photos.length - 1) {
+            navigatePhoto(1);
+        }
+    });
+</script>

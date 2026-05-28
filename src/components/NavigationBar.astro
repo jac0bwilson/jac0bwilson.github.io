@@ -1,9 +1,6 @@
 ---
 import ThemeToggleButton from './ThemeToggleButton.astro';
-import {
-    quietTopbarControlClass,
-    topbarControlBaseClass,
-} from './topbarControlStyles';
+import { controlBaseClass, quietControlClass } from './controlStyles';
 import { navigationItems } from '../data/navigation';
 
 interface Props {
@@ -39,8 +36,8 @@ const { currentPath } = Astro.props;
                                 class:list={[
                                     'px-3 text-sm font-medium no-underline',
                                     isActive
-                                        ? `${topbarControlBaseClass} border-accent/20 bg-accent/10 text-accent`
-                                        : `${quietTopbarControlClass} text-foreground/75 hover:text-foreground hover:no-underline`,
+                                        ? `${controlBaseClass} border-accent/20 bg-accent/10 text-accent h-9`
+                                        : `${quietControlClass} text-foreground/75 hover:text-foreground h-9 hover:no-underline`,
                                 ]}
                             >
                                 {item.text}

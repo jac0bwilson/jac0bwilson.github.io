@@ -37,3 +37,11 @@ export type CloudinaryResource = {
     url: string;
     secure_url: string;
 };
+
+export type Photo = CloudinaryResource & {
+    alt: string;
+    aspectRatio: number;
+    flexBasis: number;
+    thumbnailUrl: string;
+    fullUrl: string;
+};
