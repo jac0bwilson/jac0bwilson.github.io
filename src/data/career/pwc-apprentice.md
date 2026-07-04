@@ -1,7 +1,7 @@
 ---
 position: 0
 company: PwC UK
-role: Technology Degree Apprenti
+role: Technology Degree Apprentice
 start: September 2018
 end: July 2022
 location: Birmingham, UK
