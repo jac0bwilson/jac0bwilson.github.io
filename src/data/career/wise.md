@@ -7,4 +7,5 @@ end: Present
 location: London, UK
 ---
 
-Making it easier for our customers to get paid wherever they are in the world.
+Making it easier for our customers to get paid like a local, wherever they are
+in the world.
