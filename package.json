@@ -23,9 +23,6 @@
         "prettier-plugin-astro": "^1.1.1",
         "prettier-plugin-tailwindcss": "^0.8.0"
     },
-    "overrides": {
-        "satteri": "0.10.3"
-    },
     "allowScripts": {
         "fsevents@2.3.3": true
     }
