@@ -27,7 +27,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v6
         with:
-            node-version: 22
+            node-version: 24
         env:
             CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
             CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
